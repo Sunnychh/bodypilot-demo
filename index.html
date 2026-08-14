@@ -37,9 +37,8 @@
     .back, .icon-btn { width:44px; height:44px; border:0; border-radius:16px; display:grid; place-items:center; background:rgba(255,250,241,.75); }
     .top-actions { display:flex; gap:8px; }
     .icon { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-    .brand-mini { display:flex; align-items:center; gap:10px; }
-    .brand-mini img { width:38px; height:38px; border-radius:13px; object-fit:cover; }
-    .brand-mini b { color:var(--pine); font-size:18px; letter-spacing:-.5px; }
+    .home-title { display:flex; flex-direction:column; gap:1px; }
+    .home-title b { color:var(--ink); font-size:21px; letter-spacing:-.5px; }
     .card { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,250,241,.82); box-shadow:0 8px 28px rgba(52,67,59,.06); }
     .label { color:var(--muted); font-size:12px; font-weight:650; }
     .pill { min-height:28px; display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; background:var(--sage-soft); color:var(--pine); font-size:11px; font-weight:750; }
@@ -56,15 +55,14 @@
     .tabbar button.active { background:var(--sage-soft); color:var(--pine); }
     .tabbar .icon { width:20px; height:20px; }
     .welcome { background:var(--pine); color:#fffaf1; }
-    .welcome .welcome-inner { position:relative; flex:1; display:flex; flex-direction:column; padding:28px 24px 26px; overflow:hidden; }
-    .welcome .halo { position:absolute; width:330px; height:330px; top:44px; left:30px; border-radius:50%; background:radial-gradient(circle,rgba(168,200,169,.27),rgba(168,200,169,0) 68%); }
-    .welcome-logo { width:72px; height:72px; border-radius:24px; object-fit:cover; box-shadow:0 16px 40px rgba(0,0,0,.18); }
-    .welcome-art { width:270px; height:270px; align-self:center; object-fit:cover; border-radius:56px; margin-top:34px; box-shadow:0 28px 70px rgba(0,0,0,.24); }
-    .welcome-copy { margin-top:auto; position:relative; }
+    .welcome .welcome-inner { position:relative; flex:1; display:flex; flex-direction:column; padding:32px 24px 26px; overflow:hidden; }
+    .welcome .halo { position:absolute; width:330px; height:330px; top:10px; left:30px; border-radius:50%; background:radial-gradient(circle,rgba(168,200,169,.27),rgba(168,200,169,0) 68%); }
+    .welcome-art { width:244px; height:244px; align-self:center; object-fit:cover; border-radius:52px; margin-top:28px; box-shadow:0 28px 70px rgba(0,0,0,.24); }
+    .welcome-copy { margin-top:72px; position:relative; }
     .welcome-copy span { color:#bed5c3; font-size:13px; font-weight:750; letter-spacing:2px; }
     .welcome-copy h1 { margin:10px 0 12px; font-size:37px; line-height:1.18; letter-spacing:-1.5px; }
     .welcome-copy p { margin:0; color:rgba(255,250,241,.72); font-size:14px; line-height:1.75; }
-    .welcome-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:24px; }
+    .welcome-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:auto; }
     .welcome-actions .primary { background:#fffaf1; color:var(--pine); }
     .privacy-note { text-align:center; font-size:10px; color:rgba(255,250,241,.55); }
     .onboard-progress { display:flex; gap:6px; padding:8px 20px 12px; }
@@ -85,8 +83,7 @@
     .choice.selected { border-color:var(--pine-2); background:var(--sage-soft); }
     .home-hero { margin:4px 20px 14px; padding:22px; border-radius:29px; color:#fffaf1; background:var(--pine); box-shadow:var(--shadow); overflow:hidden; position:relative; }
     .home-hero:after { content:""; position:absolute; width:190px; height:190px; right:-78px; top:-92px; border:35px solid rgba(168,200,169,.16); border-radius:50%; }
-    .home-hero .date { color:#bed5c3; font-size:12px; font-weight:700; }
-    .home-hero h2 { margin:10px 0 4px; font-size:27px; letter-spacing:-1px; }
+    .home-hero h2 { margin:0 0 4px; font-size:27px; letter-spacing:-1px; }
     .home-hero p { margin:0; color:rgba(255,250,241,.72); font-size:13px; line-height:1.65; }
     .home-status { display:flex; align-items:center; justify-content:space-between; margin-top:20px; }
     .pain-orb { width:66px; height:66px; border-radius:50%; display:grid; place-items:center; background:#f0c96e; color:#493511; box-shadow:0 0 0 8px rgba(240,201,110,.1); }
@@ -269,7 +266,7 @@
 <div id="app">
   <section class="screen welcome active" data-screen="welcome" data-screen-label="首次使用">
     <div class="welcome-inner">
-      <div class="halo"></div><img class="welcome-logo" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-brand-logo alt="BodyPilot Logo">
+      <div class="halo"></div>
       <img class="welcome-art" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-brand-logo alt="BodyPilot 助手">
       <div class="welcome-copy"><span>BODY · PILOT</span><h1>说说哪里疼。<br>剩下的交给我整理。</h1><p>记录疼痛变化，检查危险信号，复诊时生成一份医生能快速阅读的摘要。</p></div>
       <div class="welcome-actions"><button class="primary" data-go="onboarding">开始记录</button><small class="privacy-note">记录归你所有 · 内容仅供就医沟通，不构成诊断</small></div>
@@ -285,8 +282,8 @@
   </section>
 
   <section class="screen" data-screen="home" data-screen-label="疼痛日记首页">
-    <div class="topbar"><div class="brand-mini"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-brand-logo alt=""><b>BodyPilot</b></div><div class="top-actions"><button class="icon-btn" data-go="summary" aria-label="给医生看"><i class="icon" data-lucide="file-heart"></i></button><button class="icon-btn" data-go="settings" aria-label="我的"><i class="icon" data-lucide="user-round"></i></button></div></div>
-    <div class="home-hero"><span class="date">8 月 13 日 · 星期四</span><h2>早上好，小林</h2><p>右侧腰部较昨天减轻。今天按原计划观察活动后的变化。</p><div class="home-status"><div class="pain-orb"><div><b>4</b><small>/10</small></div></div><div class="home-mini-stats"><div><b>恢复期</b><small>当前阶段</small></div><div><b>12 天</b><small>连续记录</small></div></div></div></div>
+    <div class="topbar"><div class="home-title"><span class="eyebrow">8 月 13 日 · 星期四</span><b>疼痛日记</b></div><div class="top-actions"><button class="icon-btn" data-go="summary" aria-label="给医生看"><i class="icon" data-lucide="file-heart"></i></button><button class="icon-btn" data-go="settings" aria-label="我的"><i class="icon" data-lucide="user-round"></i></button></div></div>
+    <div class="home-hero"><h2>早上好，小林</h2><p>右侧腰部较昨天减轻。今天按原计划观察活动后的变化。</p><div class="home-status"><div class="pain-orb"><div><b>4</b><small>/10</small></div></div><div class="home-mini-stats"><div><b>恢复期</b><small>当前阶段</small></div><div><b>12 天</b><small>连续记录</small></div></div></div></div>
     <div class="voice-row"><button class="voice-btn" data-go="conversation" aria-label="按住说话"><i class="icon" data-lucide="mic" style="width:28px;height:28px"></i></button><div class="voice-copy"><b>按住说话，记录这次疼痛</b><small>描述位置、感觉或发生时间即可</small></div></div>
     <div class="scroll" style="padding-top:0"><div class="section-head"><h2>疼痛日记</h2><button data-go="summary">生成就医摘要</button></div><div class="diary-list"><article class="card diary" data-go="detail"><div class="diary-top"><span class="level">4</span><div class="diary-main"><b>右侧下腰 · 起床后紧绷</b><small>今天 08:40 · 恢复期</small></div><i class="icon" data-lucide="chevron-right"></i></div><p class="care">步行时间从 10 分钟增加到 25 分钟，活动后疼痛没有加重。</p></article><article class="card diary"><div class="diary-top"><span class="level stable">3</span><div class="diary-main"><b>腰桥训练完成</b><small>昨天 20:15 · 右侧发力更明显</small></div><i class="icon" data-lucide="chevron-right"></i></div></article><article class="card diary"><div class="diary-top"><span class="level">6</span><div class="diary-main"><b>久坐后疼痛加重</b><small>8 月 10 日 · 无腿部放射</small></div><i class="icon" data-lucide="chevron-right"></i></div></article></div></div>
     <nav class="tabbar"><button class="active" data-go="home"><i class="icon" data-lucide="notebook-tabs"></i><span>日记</span></button><button data-go="conversation"><i class="icon" data-lucide="message-circle"></i><span>对话</span></button><button data-go="progress"><i class="icon" data-lucide="chart-no-axes-column-increasing"></i><span>进展</span></button><button data-go="settings"><i class="icon" data-lucide="user-round"></i><span>我的</span></button></nav>
