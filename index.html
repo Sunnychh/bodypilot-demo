@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BodyPilot">
+  <meta name="theme-color" content="#123f35">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A">
+  <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A">
+  <title>BodyPilot · 疼痛记录</title>
+  <style>
+    :root {
+      --pine:#123f35; --pine-2:#205c4c; --sage:#a8c8a9; --sage-soft:#dce9d8;
+      --paper:#f7efe3; --paper-2:#efe2d0; --cream:#fffaf1; --ink:#20312c;
+      --muted:#69766f; --line:rgba(32,49,44,.12); --coral:#ef6b5f; --coral-dark:#9b3834;
+      --coral-soft:#f7d5cf; --amber:#d99a3b; --amber-soft:#f3e2b9; --shadow:0 18px 55px rgba(38,48,42,.16);
+      --radius:22px; --ease:cubic-bezier(.22,.8,.28,1);
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; height:100%; overscroll-behavior:none; }
+    body { display:grid; place-items:center; background:#d8d2c8; color:var(--ink); font-family:-apple-system,"SF Pro Text","PingFang SC","Noto Sans SC",sans-serif; }
+    button, input, textarea { font:inherit; }
+    button { color:inherit; }
+    #app { position:relative; width:100vw; height:100vh; overflow:hidden; background:var(--paper); padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom); }
+    @media (min-width:700px) { #app { width:390px; height:844px; border-radius:44px; box-shadow:0 35px 100px rgba(23,38,33,.3); } }
+    .screen { position:absolute; inset:0; display:flex; flex-direction:column; background:var(--paper); opacity:0; visibility:hidden; transform:translateX(16px); transition:.28s var(--ease); }
+    .screen.active { opacity:1; visibility:visible; transform:none; z-index:2; }
+    .screen[data-screen-label="紧急就医"] { background:var(--coral-dark); color:#fffaf1; }
+    .scroll { flex:1; overflow:auto; scrollbar-width:none; padding:12px 20px 114px; }
+    .scroll::-webkit-scrollbar { display:none; }
+    .topbar { min-height:62px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px 8px; }
+    .topbar h1 { margin:0; font-size:24px; letter-spacing:-.8px; }
+    .topbar .eyebrow { display:block; margin-bottom:2px; color:var(--muted); font-size:11px; font-weight:720; letter-spacing:.8px; }
+    .back, .icon-btn { width:44px; height:44px; border:0; border-radius:16px; display:grid; place-items:center; background:rgba(255,250,241,.75); }
+    .top-actions { display:flex; gap:8px; }
+    .icon { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+    .brand-mini { display:flex; align-items:center; gap:10px; }
+    .brand-mini img { width:38px; height:38px; border-radius:13px; }
+    .brand-mini b { color:var(--pine); font-size:18px; letter-spacing:-.5px; }
+    .card { border:1px solid var(--line); border-radius:var(--radius); background:rgba(255,250,241,.82); box-shadow:0 8px 28px rgba(52,67,59,.06); }
+    .label { color:var(--muted); font-size:12px; font-weight:650; }
+    .pill { min-height:28px; display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; background:var(--sage-soft); color:var(--pine); font-size:11px; font-weight:750; }
+    .pill.coral { background:var(--coral-soft); color:var(--coral-dark); }
+    .primary, .secondary, .danger-btn { min-height:52px; border:0; border-radius:18px; padding:13px 18px; font-weight:760; transition:.18s var(--ease); }
+    .primary { background:var(--pine); color:#fffaf1; box-shadow:0 10px 24px rgba(18,63,53,.2); }
+    .secondary { background:var(--cream); border:1px solid var(--line); }
+    .danger-btn { background:#fffaf1; color:var(--coral-dark); }
+    button:active { transform:scale(.975); }
+    .sticky-actions { position:absolute; left:0; right:0; bottom:0; z-index:5; display:flex; gap:10px; padding:14px 20px calc(16px + env(safe-area-inset-bottom)); background:linear-gradient(180deg,rgba(247,239,227,0),rgba(247,239,227,.94) 24%,var(--paper) 48%); }
+    .sticky-actions > * { flex:1; }
+    .tabbar { position:absolute; left:14px; right:14px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:10; height:68px; display:grid; grid-template-columns:repeat(4,1fr); gap:4px; padding:7px; border:1px solid rgba(255,255,255,.55); border-radius:25px; background:rgba(255,250,241,.92); box-shadow:0 14px 45px rgba(28,48,40,.2); backdrop-filter:blur(22px); }
+    .tabbar button { min-width:44px; border:0; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; background:transparent; color:#7c847f; font-size:10px; font-weight:700; }
+    .tabbar button.active { background:var(--sage-soft); color:var(--pine); }
+    .tabbar .icon { width:20px; height:20px; }
+    .welcome { background:var(--pine); color:#fffaf1; }
+    .welcome .welcome-inner { position:relative; flex:1; display:flex; flex-direction:column; padding:28px 24px 26px; overflow:hidden; }
+    .welcome .halo { position:absolute; width:330px; height:330px; top:44px; left:30px; border-radius:50%; background:radial-gradient(circle,rgba(168,200,169,.27),rgba(168,200,169,0) 68%); }
+    .welcome-logo { width:72px; height:72px; border-radius:24px; box-shadow:0 16px 40px rgba(0,0,0,.18); }
+    .welcome-art { width:270px; height:270px; align-self:center; object-fit:cover; border-radius:50%; margin-top:34px; mix-blend-mode:screen; box-shadow:0 0 70px rgba(168,200,169,.18); }
+    .welcome-copy { margin-top:auto; position:relative; }
+    .welcome-copy span { color:#bed5c3; font-size:13px; font-weight:750; letter-spacing:2px; }
+    .welcome-copy h1 { margin:10px 0 12px; font-size:37px; line-height:1.18; letter-spacing:-1.5px; }
+    .welcome-copy p { margin:0; color:rgba(255,250,241,.72); font-size:14px; line-height:1.75; }
+    .welcome-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:24px; }
+    .welcome-actions .primary { background:#fffaf1; color:var(--pine); }
+    .privacy-note { text-align:center; font-size:10px; color:rgba(255,250,241,.55); }
+    .onboard-progress { display:flex; gap:6px; padding:8px 20px 12px; }
+    .onboard-progress i { flex:1; height:4px; border-radius:999px; background:rgba(18,63,53,.1); }
+    .onboard-progress i.on { background:var(--pine); }
+    .onboarding-title { padding:16px 22px 6px; }
+    .onboarding-title h1 { margin:8px 0; font-size:30px; letter-spacing:-1px; }
+    .onboarding-title p { margin:0; color:var(--muted); font-size:14px; line-height:1.75; }
+    .field-stack { display:grid; gap:14px; padding-top:20px; }
+    .field { display:grid; gap:8px; }
+    .field label { font-size:12px; font-weight:750; color:var(--muted); }
+    .field input { width:100%; min-height:54px; border:1px solid var(--line); border-radius:17px; padding:0 16px; background:var(--cream); color:var(--ink); outline:none; }
+    .field input:focus { border-color:var(--pine-2); box-shadow:0 0 0 4px rgba(32,92,76,.1); }
+    .choice-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .choice { min-height:62px; border:1px solid var(--line); border-radius:18px; padding:12px 14px; background:var(--cream); text-align:left; }
+    .choice b { display:block; font-size:14px; }
+    .choice small { color:var(--muted); font-size:10px; }
+    .choice.selected { border-color:var(--pine-2); background:var(--sage-soft); }
+    .home-hero { margin:4px 20px 14px; padding:22px; border-radius:29px; color:#fffaf1; background:var(--pine); box-shadow:var(--shadow); overflow:hidden; position:relative; }
+    .home-hero:after { content:""; position:absolute; width:190px; height:190px; right:-78px; top:-92px; border:35px solid rgba(168,200,169,.16); border-radius:50%; }
+    .home-hero .date { color:#bed5c3; font-size:12px; font-weight:700; }
+    .home-hero h2 { margin:10px 0 4px; font-size:27px; letter-spacing:-1px; }
+    .home-hero p { margin:0; color:rgba(255,250,241,.72); font-size:13px; line-height:1.65; }
+    .home-status { display:flex; align-items:center; justify-content:space-between; margin-top:20px; }
+    .pain-orb { width:66px; height:66px; border-radius:50%; display:grid; place-items:center; background:#f0c96e; color:#493511; box-shadow:0 0 0 8px rgba(240,201,110,.1); }
+    .pain-orb b { font-size:25px; }
+    .pain-orb small { font-size:9px; }
+    .home-mini-stats { display:flex; gap:18px; position:relative; z-index:1; }
+    .home-mini-stats div { display:flex; flex-direction:column; gap:3px; }
+    .home-mini-stats b { font-size:16px; }
+    .home-mini-stats small { color:#bed5c3; font-size:9px; }
+    .voice-row { display:flex; align-items:center; gap:14px; margin:0 20px 20px; }
+    .voice-btn { width:74px; height:74px; flex:0 0 auto; border:0; border-radius:27px; display:grid; place-items:center; background:var(--coral); color:#fff; box-shadow:0 13px 30px rgba(239,107,95,.28); position:relative; }
+    .voice-btn:before { content:""; position:absolute; inset:-7px; border:1px solid rgba(239,107,95,.3); border-radius:33px; animation:breathe 2.7s ease-in-out infinite; }
+    @keyframes breathe { 50% { transform:scale(1.08); opacity:.2; } }
+    .voice-copy b { display:block; font-size:15px; }
+    .voice-copy small { display:block; margin-top:4px; color:var(--muted); line-height:1.5; }
+    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin:10px 2px 12px; }
+    .section-head h2 { margin:0; font-size:19px; }
+    .section-head button { min-height:44px; border:0; background:transparent; color:var(--pine-2); font-size:12px; font-weight:750; }
+    .diary-list { display:grid; gap:12px; }
+    .diary { padding:15px; cursor:pointer; }
+    .diary-top { display:flex; align-items:center; gap:11px; }
+    .level { width:46px; height:46px; border-radius:15px; display:grid; place-items:center; font-weight:820; background:var(--amber-soft); color:#72511d; }
+    .level.stable { background:var(--sage-soft); color:var(--pine); }
+    .diary-main { flex:1; }
+    .diary-main b { display:block; font-size:14px; }
+    .diary-main small { display:block; margin-top:4px; color:var(--muted); font-size:11px; }
+    .diary .care { margin:12px 0 0; padding-top:11px; border-top:1px dashed var(--line); color:#53635c; font-size:12px; line-height:1.6; }
+    .chat-bg { background:linear-gradient(180deg,#edf2e7 0%,var(--paper) 45%); }
+    .chat-body { flex:1; overflow:auto; padding:14px 18px 126px; }
+    .ai-presence { display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+    .ai-presence img { width:42px; height:42px; border-radius:15px; }
+    .ai-presence span { display:flex; flex-direction:column; }
+    .ai-presence small { color:var(--muted); font-size:10px; }
+    .messages { display:grid; gap:12px; }
+    .bubble { max-width:86%; padding:13px 15px; border-radius:20px; font-size:14px; line-height:1.65; box-shadow:0 5px 18px rgba(31,54,44,.05); }
+    .bubble.ai { justify-self:start; border-bottom-left-radius:7px; background:var(--sage-soft); }
+    .bubble.user { justify-self:end; border-bottom-right-radius:7px; background:var(--cream); border:1px solid rgba(32,49,44,.08); }
+    .quick-options { display:grid; gap:9px; max-width:92%; }
+    .quick-options button { min-height:50px; border:1px solid var(--line); border-radius:17px; padding:11px 14px; text-align:left; background:rgba(255,250,241,.92); font-size:13px; }
+    .quick-options button.selected { border-color:var(--pine-2); background:var(--sage-soft); }
+    .composer { position:absolute; left:14px; right:14px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:8; display:flex; align-items:center; gap:9px; padding:8px 8px 8px 15px; border:1px solid rgba(255,255,255,.8); border-radius:24px; background:rgba(255,250,241,.94); box-shadow:0 16px 42px rgba(28,48,40,.18); backdrop-filter:blur(20px); }
+    .composer input { flex:1; min-width:0; border:0; outline:0; background:transparent; color:var(--ink); }
+    .composer button { width:46px; height:46px; border:0; border-radius:17px; display:grid; place-items:center; background:var(--pine); color:white; }
+    .voice-overlay { position:absolute; inset:0; z-index:20; display:none; flex-direction:column; align-items:center; justify-content:center; padding:30px; background:rgba(18,63,53,.96); color:#fffaf1; }
+    .voice-overlay.show { display:flex; }
+    .wave { height:80px; display:flex; align-items:center; gap:7px; margin:28px 0; }
+    .wave i { width:7px; height:28px; border-radius:99px; background:#bed5c3; animation:wave 1s ease-in-out infinite; }
+    .wave i:nth-child(2),.wave i:nth-child(6){animation-delay:.12s}.wave i:nth-child(3),.wave i:nth-child(5){animation-delay:.24s}.wave i:nth-child(4){animation-delay:.36s}
+    @keyframes wave { 50% { height:72px; background:#fffaf1; } }
+    .safety-intro { margin-bottom:14px; padding:16px; display:flex; gap:12px; align-items:flex-start; background:var(--coral-soft); border-color:rgba(155,56,52,.12); }
+    .safety-intro .shield { width:42px; height:42px; flex:0 0 auto; border-radius:15px; display:grid; place-items:center; background:var(--coral); color:white; }
+    .safety-intro b { font-size:14px; }
+    .safety-intro p { margin:5px 0 0; color:#704744; font-size:11px; line-height:1.55; }
+    .safety-list { display:grid; gap:10px; }
+    .safety-item { padding:14px; }
+    .safety-item header { display:flex; align-items:center; gap:10px; }
+    .safety-item header span { width:28px; height:28px; border-radius:10px; display:grid; place-items:center; background:var(--paper-2); color:var(--pine); font-weight:800; font-size:11px; }
+    .safety-item b { font-size:13px; }
+    .tri-choice { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:12px; }
+    .tri-choice button { min-height:42px; border:1px solid var(--line); border-radius:13px; background:var(--cream); font-size:11px; }
+    .tri-choice button.yes.selected, .tri-choice button.unsure.selected { background:var(--coral-soft); border-color:var(--coral); color:var(--coral-dark); }
+    .tri-choice button.no.selected { background:var(--sage-soft); border-color:var(--pine-2); color:var(--pine); }
+    .result-hero { text-align:center; padding:22px 20px; }
+    .result-mark { width:76px; height:76px; margin:0 auto 14px; border-radius:28px; display:grid; place-items:center; background:var(--sage-soft); color:var(--pine); }
+    .result-hero h2 { margin:0 0 8px; font-size:25px; }
+    .result-hero p { margin:0; color:var(--muted); font-size:13px; line-height:1.65; }
+    .plan-card { margin-top:14px; padding:17px; }
+    .plan-card header { display:flex; align-items:center; justify-content:space-between; }
+    .plan-card h3 { margin:0; font-size:16px; }
+    .plan-steps { display:grid; gap:13px; margin-top:17px; }
+    .plan-step { display:grid; grid-template-columns:32px 1fr; gap:11px; }
+    .plan-step span { width:32px; height:32px; border-radius:11px; display:grid; place-items:center; background:var(--paper-2); color:var(--pine); font-size:11px; font-weight:800; }
+    .plan-step b { display:block; font-size:13px; }
+    .plan-step small { color:var(--muted); font-size:10px; line-height:1.5; }
+    .emergency-inner { flex:1; display:flex; flex-direction:column; padding:34px 24px 26px; }
+    .emergency-mark { width:84px; height:84px; border-radius:30px; display:grid; place-items:center; background:rgba(255,250,241,.12); color:#fffaf1; border:1px solid rgba(255,255,255,.18); }
+    .emergency-inner .kicker { margin-top:32px; color:#ffd6ce; font-size:12px; font-weight:800; letter-spacing:1.5px; }
+    .emergency-inner h1 { margin:10px 0 14px; font-size:34px; line-height:1.18; letter-spacing:-1.4px; }
+    .emergency-inner > p { margin:0; color:rgba(255,250,241,.78); line-height:1.75; font-size:14px; }
+    .signal-card { margin-top:24px; padding:16px; border:1px solid rgba(255,255,255,.16); border-radius:20px; background:rgba(255,250,241,.09); }
+    .signal-card small { color:#ffd6ce; }
+    .signal-card b { display:block; margin-top:6px; font-size:17px; }
+    .emergency-actions { display:grid; gap:10px; margin-top:auto; }
+    .emergency-actions .secondary { background:transparent; color:#fffaf1; border-color:rgba(255,255,255,.28); }
+    .detail-cover { margin:2px 20px 14px; padding:19px; border-radius:26px; color:#fffaf1; background:var(--pine); }
+    .detail-cover .date { color:#bed5c3; font-size:11px; }
+    .detail-cover h2 { margin:8px 0; font-size:23px; }
+    .detail-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+    .detail-tags span { padding:6px 9px; border-radius:999px; background:rgba(255,255,255,.12); font-size:10px; }
+    .record-sheet { overflow:hidden; }
+    .record-row { display:grid; grid-template-columns:78px 1fr; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); }
+    .record-row:last-child { border-bottom:0; }
+    .record-row dt { color:var(--muted); font-size:11px; }
+    .record-row dd { margin:0; font-size:12px; line-height:1.55; font-weight:650; }
+    .conversation-fold { margin-top:14px; overflow:hidden; }
+    .conversation-fold button { width:100%; min-height:52px; border:0; padding:0 16px; display:flex; justify-content:space-between; align-items:center; background:transparent; font-weight:750; }
+    .fold-content { display:none; padding:0 16px 16px; color:var(--muted); font-size:12px; line-height:1.7; }
+    .conversation-fold.open .fold-content { display:block; animation:fadeUp .25s var(--ease); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(-6px); } }
+    .pain-picker { padding:18px; text-align:center; }
+    .pain-value { font-size:52px; font-weight:850; color:var(--pine); }
+    .pain-scale { display:grid; grid-template-columns:repeat(6,1fr); gap:5px; margin-top:16px; }
+    .pain-scale button { aspect-ratio:1; border:1px solid var(--line); border-radius:13px; background:var(--cream); font-size:11px; }
+    .pain-scale button.selected { background:var(--amber); border-color:var(--amber); color:white; }
+    .toggle-card { margin-top:12px; padding:15px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .toggle-card b { display:block; font-size:13px; }
+    .toggle-card small { color:var(--muted); font-size:10px; }
+    .switch { width:52px; height:30px; flex:0 0 auto; border:0; border-radius:999px; background:#cfd4cf; padding:3px; }
+    .switch:after { content:""; display:block; width:24px; height:24px; border-radius:50%; background:white; transition:.2s; }
+    .switch.on { background:var(--coral); }
+    .switch.on:after { transform:translateX(22px); }
+    .reminder-card { margin:8px 20px 0; padding:21px; background:var(--pine); color:#fffaf1; border:0; }
+    .reminder-card .context { display:flex; align-items:center; gap:9px; color:#bed5c3; font-size:11px; }
+    .reminder-card h2 { margin:14px 0 9px; font-size:25px; line-height:1.3; }
+    .reminder-card p { margin:0; color:rgba(255,250,241,.72); font-size:13px; line-height:1.65; }
+    .reminder-options { display:grid; gap:10px; margin-top:18px; }
+    .reminder-options button { min-height:52px; border:1px solid rgba(255,255,255,.18); border-radius:17px; background:rgba(255,255,255,.1); color:white; text-align:left; padding:0 15px; font-weight:700; }
+    .reminder-options button:first-child { background:#fffaf1; color:var(--pine); }
+    .streak { display:flex; align-items:center; justify-content:center; gap:7px; margin-top:17px; color:#bed5c3; font-size:11px; }
+    .progress-hero { margin:2px 20px 14px; padding:19px; border-radius:27px; background:var(--cream); border:1px solid var(--line); }
+    .progress-hero header { display:flex; justify-content:space-between; align-items:flex-start; }
+    .progress-hero h2 { margin:5px 0 0; font-size:23px; }
+    .delta { padding:6px 9px; border-radius:999px; background:var(--sage-soft); color:var(--pine); font-size:10px; font-weight:800; }
+    .chart { width:100%; height:150px; margin-top:12px; overflow:visible; }
+    .chart .grid { stroke:#d8d7ce; stroke-width:1; }
+    .chart .area { fill:url(#painArea); }
+    .chart .line { fill:none; stroke:var(--coral); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+    .chart circle { fill:var(--cream); stroke:var(--coral); stroke-width:3; }
+    .calendar { padding:17px; }
+    .calendar header { display:flex; align-items:center; justify-content:space-between; }
+    .calendar h3 { margin:0; font-size:16px; }
+    .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:7px; margin-top:14px; }
+    .day { aspect-ratio:1; display:grid; place-items:center; border-radius:11px; color:#8a908d; font-size:10px; background:var(--paper); }
+    .day.done { background:var(--sage-soft); color:var(--pine); font-weight:800; }
+    .milestone { margin-top:13px; padding:17px; display:grid; grid-template-columns:52px 1fr; gap:13px; align-items:center; background:var(--amber-soft); }
+    .badge { width:52px; height:52px; border-radius:18px; display:grid; place-items:center; background:#fff6dc; color:#885e17; }
+    .milestone h3 { margin:0 0 4px; font-size:14px; }
+    .milestone p { margin:0; color:#735d38; font-size:11px; line-height:1.55; }
+    .summary-banner { margin:2px 20px 14px; padding:17px; display:grid; grid-template-columns:46px 1fr auto; gap:11px; align-items:center; background:var(--sage-soft); border:0; }
+    .summary-banner .doc-icon { width:46px; height:46px; border-radius:15px; display:grid; place-items:center; background:var(--cream); color:var(--pine); }
+    .summary-banner b { display:block; font-size:13px; }
+    .summary-banner small { color:var(--muted); font-size:10px; }
+    .summary-banner em { font-style:normal; color:var(--pine); font-size:9px; font-weight:800; }
+    .medical-sheet { overflow:hidden; background:#fffdf8; }
+    .sheet-head { padding:19px 17px 15px; border-bottom:2px solid var(--pine); }
+    .sheet-head small { color:var(--muted); font-size:9px; }
+    .sheet-head h2 { margin:5px 0 0; font-size:18px; }
+    .sheet-section { padding:15px 17px; border-bottom:1px solid var(--line); }
+    .sheet-section h3 { margin:0 0 7px; color:var(--pine); font-size:11px; letter-spacing:.5px; }
+    .sheet-section p { margin:0; font-size:12px; line-height:1.7; }
+    .attachment-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:13px; }
+    .attachment { padding:12px; display:flex; gap:9px; align-items:center; }
+    .attachment span { width:34px; height:34px; border-radius:11px; display:grid; place-items:center; background:var(--paper); color:var(--pine); }
+    .attachment b { display:block; font-size:10px; }
+    .attachment small { color:var(--muted); font-size:8px; }
+    .profile-hero { margin:2px 20px 14px; padding:20px; display:flex; gap:14px; align-items:center; background:var(--pine); color:white; border:0; }
+    .profile-hero img { width:66px; height:66px; border-radius:22px; }
+    .profile-hero b { display:block; font-size:20px; }
+    .profile-hero small { color:#bed5c3; }
+    .settings-list { display:grid; gap:10px; }
+    .settings-row { width:100%; min-height:58px; border:1px solid var(--line); border-radius:18px; padding:0 14px; display:flex; align-items:center; gap:11px; background:var(--cream); text-align:left; }
+    .settings-row > span { width:35px; height:35px; flex:0 0 auto; border-radius:12px; display:grid; place-items:center; background:var(--sage-soft); color:var(--pine); }
+    .settings-row p { flex:1; margin:0; }
+    .settings-row b { display:block; font-size:13px; }
+    .settings-row small { color:var(--muted); font-size:9px; }
+    .toast { position:absolute; left:50%; bottom:96px; z-index:40; max-width:310px; padding:11px 15px; border-radius:15px; background:rgba(18,63,53,.94); color:white; font-size:11px; box-shadow:var(--shadow); opacity:0; transform:translate(-50%,10px); pointer-events:none; transition:.22s; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    .modal { position:absolute; inset:0; z-index:30; display:none; align-items:flex-end; background:rgba(15,35,29,.45); backdrop-filter:blur(6px); }
+    .modal.show { display:flex; }
+    .modal-sheet { width:100%; padding:22px 20px calc(22px + env(safe-area-inset-bottom)); border-radius:28px 28px 0 0; background:var(--cream); animation:sheetUp .3s var(--ease); }
+    @keyframes sheetUp { from { transform:translateY(100%); } }
+    .modal-sheet h2 { margin:0 0 8px; font-size:22px; }
+    .modal-sheet p { margin:0 0 18px; color:var(--muted); font-size:12px; line-height:1.65; }
+    .share-options { display:grid; gap:9px; }
+    .share-options button { min-height:54px; border:1px solid var(--line); border-radius:17px; background:white; text-align:left; padding:0 15px; font-weight:700; }
+    @media (prefers-reduced-motion:reduce) { *,*:before,*:after { animation:none!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <section class="screen welcome active" data-screen="welcome" data-screen-label="首次使用">
+    <div class="welcome-inner">
+      <div class="halo"></div><img class="welcome-logo" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt="BodyPilot Logo">
+      <img class="welcome-art" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt="BodyPilot 助手">
+      <div class="welcome-copy"><span>BODY · PILOT</span><h1>说说哪里疼。<br>剩下的交给我整理。</h1><p>记录疼痛变化，检查危险信号，复诊时生成一份医生能快速阅读的摘要。</p></div>
+      <div class="welcome-actions"><button class="primary" data-go="onboarding">开始记录</button><small class="privacy-note">记录归你所有 · 内容仅供就医沟通，不构成诊断</small></div>
+    </div>
+  </section>
+
+  <section class="screen" data-screen="onboarding" data-screen-label="最小建档">
+    <div class="topbar"><button class="back" data-go="welcome" aria-label="返回"><i class="icon" data-lucide="chevron-left"></i></button><span class="label">约 30 秒</span><span style="width:44px"></span></div>
+    <div class="onboard-progress"><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="onboarding-title"><span class="pill">基本信息</span><h1>先确认两件事</h1><p>这些信息会用于疼痛记录和后续随访。</p></div>
+    <div class="scroll"><div class="field-stack"><div class="field"><label for="nickname">怎么称呼你？</label><input id="nickname" value="小林" maxlength="12"></div><div class="field"><label>本次要记录</label><div class="choice-grid"><button class="choice selected"><b>腰部疼痛</b><small>当前版本支持</small></button><button class="choice"><b>恢复训练</b><small>已有训练方案</small></button></div></div><div class="field"><label>先从哪里开始？</label><div class="choice-grid"><button class="choice selected"><b>记录这次疼痛</b><small>位置、强度和诱因</small></button><button class="choice"><b>查看恢复进展</b><small>日记和趋势</small></button></div></div></div></div>
+    <div class="sticky-actions"><button class="primary" data-go="home">进入日记</button></div>
+  </section>
+
+  <section class="screen" data-screen="home" data-screen-label="疼痛日记首页">
+    <div class="topbar"><div class="brand-mini"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt=""><b>BodyPilot</b></div><div class="top-actions"><button class="icon-btn" data-go="summary" aria-label="给医生看"><i class="icon" data-lucide="file-heart"></i></button><button class="icon-btn" data-go="settings" aria-label="我的"><i class="icon" data-lucide="user-round"></i></button></div></div>
+    <div class="home-hero"><span class="date">8 月 13 日 · 星期四</span><h2>早上好，小林</h2><p>右侧腰部较昨天减轻。今天按原计划观察活动后的变化。</p><div class="home-status"><div class="pain-orb"><div><b>4</b><small>/10</small></div></div><div class="home-mini-stats"><div><b>恢复期</b><small>当前阶段</small></div><div><b>12 天</b><small>连续记录</small></div></div></div></div>
+    <div class="voice-row"><button class="voice-btn" data-go="conversation" aria-label="按住说话"><i class="icon" data-lucide="mic" style="width:28px;height:28px"></i></button><div class="voice-copy"><b>按住说话，记录这次疼痛</b><small>描述位置、感觉或发生时间即可</small></div></div>
+    <div class="scroll" style="padding-top:0"><div class="section-head"><h2>疼痛日记</h2><button data-go="summary">生成就医摘要</button></div><div class="diary-list"><article class="card diary" data-go="detail"><div class="diary-top"><span class="level">4</span><div class="diary-main"><b>右侧下腰 · 起床后紧绷</b><small>今天 08:40 · 恢复期</small></div><i class="icon" data-lucide="chevron-right"></i></div><p class="care">步行时间从 10 分钟增加到 25 分钟，活动后疼痛没有加重。</p></article><article class="card diary"><div class="diary-top"><span class="level stable">3</span><div class="diary-main"><b>腰桥训练完成</b><small>昨天 20:15 · 右侧发力更明显</small></div><i class="icon" data-lucide="chevron-right"></i></div></article><article class="card diary"><div class="diary-top"><span class="level">6</span><div class="diary-main"><b>久坐后疼痛加重</b><small>8 月 10 日 · 无腿部放射</small></div><i class="icon" data-lucide="chevron-right"></i></div></article></div></div>
+    <nav class="tabbar"><button class="active" data-go="home"><i class="icon" data-lucide="notebook-tabs"></i><span>日记</span></button><button data-go="conversation"><i class="icon" data-lucide="message-circle"></i><span>对话</span></button><button data-go="progress"><i class="icon" data-lucide="chart-no-axes-column-increasing"></i><span>进展</span></button><button data-go="settings"><i class="icon" data-lucide="user-round"></i><span>我的</span></button></nav>
+  </section>
+
+  <section class="screen chat-bg" data-screen="conversation" data-screen-label="疼痛对话">
+    <div class="topbar"><button class="back" data-go="home"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">本次疼痛记录</span><b>先确认疼痛位置</b></div><button class="icon-btn" data-go="summary" aria-label="摘要"><i class="icon" data-lucide="file-heart"></i></button></div>
+    <div class="chat-body"><div class="ai-presence"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt="BodyPilot"><span><b>可以直接描述</b><small>不需要医学术语</small></span></div><div class="messages"><div class="bubble user">今天早上起来腰又好疼，右边最明显。</div><div class="bubble ai">上次记录的位置也是右侧下腰。这次疼痛更接近哪一处？</div><div class="quick-options"><button class="selected">A · 右侧腰部肌肉附近</button><button>B · 腰椎正中间</button><button>C · 延伸到臀部或腿</button><button>D · 位置不确定</button></div><div class="bubble ai">疼痛是突然出现，还是起床活动后逐渐变明显？</div></div></div>
+    <div class="composer"><input aria-label="输入疼痛描述" placeholder="输入疼痛描述…"><button data-voice-start aria-label="按住说话"><i class="icon" data-lucide="mic"></i></button></div>
+    <div class="voice-overlay"><span class="pill">正在录音</span><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h2>“右边像被拉住了……”</h2><p>松开后继续填写。</p><button class="danger-btn" data-voice-stop>松开并继续</button></div>
+  </section>
+
+  <section class="screen" data-screen="safety" data-screen-label="危险信号闸门">
+    <div class="topbar"><button class="back" data-go="conversation"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">本次记录 · 最后一步</span><b>危险信号筛查</b></div><span style="width:44px"></span></div>
+    <div class="scroll"><div class="card safety-intro"><div class="shield"><i class="icon" data-lucide="shield-alert"></i></div><div><b>请确认以下 5 项</b><p>选择“有”或“不确定”后，系统会停止训练建议并显示就医提示。</p></div></div><div class="safety-list" id="safetyList"></div></div>
+    <div class="sticky-actions"><button class="primary" id="safetySubmit">还需确认 5 项</button></div>
+  </section>
+
+  <section class="screen" data-screen="result" data-screen-label="安全结果与阶段计划">
+    <div class="topbar"><button class="back" data-go="safety"><i class="icon" data-lucide="chevron-left"></i></button><span class="label">筛查完成</span><span style="width:44px"></span></div>
+    <div class="scroll"><div class="result-hero"><div class="result-mark"><i class="icon" data-lucide="shield-check" style="width:36px;height:36px"></i></div><h2>未发现危险信号</h2><p>本次回答未触发紧急就医提示。结果只用于风险筛查，不代表诊断。</p></div><section class="card plan-card"><header><h3>接下来的安排</h3><span class="pill">恢复期</span></header><div class="plan-steps"><div class="plan-step"><span>今</span><div><b>保存本次疼痛记录</b><small>原始回答会保留在日记中。</small></div></div><div class="plan-step"><span>2d</span><div><b>两天后再次记录</b><small>确认疼痛强度和新症状。</small></div></div><div class="plan-step"><span>训</span><div><b>继续现有腰桥训练</b><small>按专业人士教过的动作完成。</small></div></div></div></section></div>
+    <div class="sticky-actions"><button class="secondary" data-go="conversation">回看对话</button><button class="primary" data-go="detail" data-toast="今日日记已生成">生成今日日记</button></div>
+  </section>
+
+  <section class="screen" data-screen="emergency" data-screen-label="紧急就医" role="alert">
+    <div class="emergency-inner"><div class="emergency-mark"><i class="icon" data-lucide="triangle-alert" style="width:42px;height:42px"></i></div><span class="kicker">发现危险信号</span><h1>请立即就医</h1><p>你报告了“新发大小便障碍”。请前往急诊，或联系当地急救服务。</p><div class="signal-card"><small>触发信号</small><b id="dangerSignal">新发大小便障碍</b></div><div class="emergency-actions"><button class="danger-btn" data-toast="正在打开附近医院（Demo）">查找附近医院</button><button class="secondary" data-go="summary" data-summary-mode="danger">查看就医记录</button><button class="secondary" data-go="home">我已联系医疗机构</button></div></div>
+  </section>
+
+  <section class="screen" data-screen="detail" data-screen-label="日记详情">
+    <div class="topbar"><button class="back" data-go="home"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">8 月 13 日 · 疼痛记录</span><b>今日记录</b></div><button class="icon-btn" data-go="summary" aria-label="就医摘要"><i class="icon" data-lucide="file-heart"></i></button></div>
+    <div class="detail-cover"><span class="date">今天 08:40</span><h2>右侧下腰 · 起床后紧绷</h2><div class="detail-tags"><span>疼痛 4/10</span><span>恢复期</span><span>危险筛查已完成</span></div></div>
+    <div class="scroll"><dl class="card record-sheet"><div class="record-row"><dt>主诉</dt><dd>右侧下腰疼痛，起床活动后更明显</dd></div><div class="record-row"><dt>性质</dt><dd>紧绷、被拉住的感觉</dd></div><div class="record-row"><dt>放射</dt><dd>没有延伸到臀部或腿部</dd></div><div class="record-row"><dt>危险筛查</dt><dd style="color:var(--pine)">5 项均回答“没有”</dd></div><div class="record-row"><dt>今日安排</dt><dd>减少久坐；晚间按现有方案训练</dd></div></dl><section class="card conversation-fold"><button><span>查看原始对话</span><i class="icon" data-lucide="chevron-down"></i></button><div class="fold-content">08:40 你说：“今天早上起来腰又好疼，右边最明显。”<br><br>08:41 BodyPilot 询问了位置、诱因和放射情况，并完成 5 项危险信号筛查。</div></section></div>
+    <div class="sticky-actions"><button class="secondary" data-go="checkin">记录下次变化</button><button class="primary" data-go="summary">生成就医摘要</button></div>
+  </section>
+
+  <section class="screen" data-screen="checkin" data-screen-label="阶段随访">
+    <div class="topbar"><button class="back" data-go="home"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">约 30 秒</span><b>记录今天的变化</b></div><span style="width:44px"></span></div>
+    <div class="scroll"><section class="card pain-picker"><span class="label">现在的疼痛强度</span><div class="pain-value"><span id="painValue">4</span><small style="font-size:14px;color:var(--muted)">/10</small></div><div class="pain-scale" id="painScale"></div></section><button class="card toggle-card" id="newSignal"><span><b>出现新的麻木、无力或排便变化</b><small>如有，将立即进入就医路径</small></span><i class="switch"></i></button><section class="card plan-card"><header><h3>和上次相比</h3></header><div class="choice-grid" style="margin-top:13px"><button class="choice"><b>明显好转</b><small>活动更轻松</small></button><button class="choice selected"><b>差不多</b><small>变化不明显</small></button><button class="choice"><b>有所加重</b><small>需要重新评估</small></button><button class="choice"><b>说不清</b><small>继续问我</small></button></div></section></div>
+    <div class="sticky-actions"><button class="primary" id="saveCheckin">写入今日日记</button></div>
+  </section>
+
+  <section class="screen" data-screen="training" data-screen-label="训练协商提醒">
+    <div class="topbar"><button class="back" data-go="home"><i class="icon" data-lucide="chevron-left"></i></button><span class="label">训练提醒</span><span style="width:44px"></span></div>
+    <section class="card reminder-card"><div class="context"><i class="icon" data-lucide="map-pin"></i><span>你设置了“外出时改到晚上”</span></div><h2>腰桥训练改到<br>今晚 8 点？</h2><p>按康复师教过的动作完成。今天疼痛加重时可以跳过。</p><div class="reminder-options"><button data-go="feedback">改到今晚 8 点</button><button data-go="feedback">现在开始</button><button data-go="home" data-toast="已跳过今天的训练">今天跳过</button></div><div class="streak"><i class="icon" data-lucide="flame"></i><span>已连续记录 12 天</span></div></section>
+  </section>
+
+  <section class="screen" data-screen="feedback" data-screen-label="训练反馈">
+    <div class="topbar"><button class="back" data-go="training"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">训练已完成</span><b>记录训练后的感觉</b></div><span style="width:44px"></span></div>
+    <div class="scroll"><section class="card plan-card"><header><h3>腰桥 · 2 组</h3><span class="pill">12 分钟</span></header><div class="field-stack"><div class="field"><label>训练后的感觉</label><div class="choice-grid"><button class="choice selected"><b>轻松一些</b><small>疼痛没有增加</small></button><button class="choice"><b>差不多</b><small>可以接受</small></button><button class="choice"><b>更疼了</b><small>记录变化</small></button><button class="choice"><b>出现异常</b><small>麻木或无力</small></button></div></div><div class="field"><label>左右发力感受</label><div class="choice-grid"><button class="choice"><b>比较均衡</b><small>没有明显差异</small></button><button class="choice selected"><b>右侧更明显</b><small>保存到训练记录</small></button></div></div></div></section><div class="card" style="margin-top:12px;padding:16px;display:flex;gap:12px;align-items:center"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt="" style="width:48px;height:48px;border-radius:16px"><p style="margin:0;font-size:12px;line-height:1.65">已记录：右侧发力更明显，训练后疼痛没有增加。</p></div></div>
+    <div class="sticky-actions"><button class="primary" data-go="progress" data-toast="训练感受已写入日记与趋势">保存训练反馈</button></div>
+  </section>
+
+  <section class="screen" data-screen="progress" data-screen-label="康复进展">
+    <div class="topbar"><div><span class="eyebrow">疼痛与训练记录</span><h1>进展</h1></div><button class="icon-btn" data-go="summary" aria-label="就医摘要"><i class="icon" data-lucide="file-heart"></i></button></div>
+    <section class="progress-hero"><header><div><span class="label">近 14 天疼痛趋势</span><h2>7 分 → 3 分</h2></div><span class="delta">下降 57%</span></header><svg class="chart" viewBox="0 0 330 150" preserveAspectRatio="none"><defs><linearGradient id="painArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ef6b5f" stop-opacity=".28"/><stop offset="1" stop-color="#ef6b5f" stop-opacity="0"/></linearGradient></defs><path class="grid" d="M0 35h330M0 75h330M0 115h330"/><path class="area" d="M5 24 C50 18 67 52 102 48 S155 79 190 72 S244 104 325 108 L325 145H5Z"/><path class="line" d="M5 24 C50 18 67 52 102 48 S155 79 190 72 S244 104 325 108"/><circle cx="5" cy="24" r="5"/><circle cx="102" cy="48" r="5"/><circle cx="190" cy="72" r="5"/><circle cx="325" cy="108" r="5"/></svg></section>
+    <div class="scroll" style="padding-top:0"><section class="card calendar"><header><h3>8 月训练日历</h3><span class="pill">完成 9 次</span></header><div class="calendar-grid"><span class="day">一</span><span class="day">二</span><span class="day">三</span><span class="day">四</span><span class="day">五</span><span class="day">六</span><span class="day">日</span><span class="day done">1</span><span class="day done">2</span><span class="day">3</span><span class="day done">4</span><span class="day">5</span><span class="day done">6</span><span class="day done">7</span><span class="day">8</span><span class="day done">9</span><span class="day done">10</span><span class="day">11</span><span class="day done">12</span><span class="day done">13</span><span class="day">14</span></div></section><section class="card milestone"><div class="badge"><i class="icon" data-lucide="trophy" style="width:28px;height:28px"></i></div><div><h3>步行时间增至 25 分钟</h3><p>12 天前记录为“难以站直”。</p></div></section></div>
+    <nav class="tabbar"><button data-go="home"><i class="icon" data-lucide="notebook-tabs"></i><span>日记</span></button><button data-go="conversation"><i class="icon" data-lucide="message-circle"></i><span>对话</span></button><button class="active" data-go="progress"><i class="icon" data-lucide="chart-no-axes-column-increasing"></i><span>进展</span></button><button data-go="settings"><i class="icon" data-lucide="user-round"></i><span>我的</span></button></nav>
+  </section>
+
+  <section class="screen" data-screen="summary" data-screen-label="就医摘要">
+    <div class="topbar"><button class="back" data-go="home"><i class="icon" data-lucide="chevron-left"></i></button><div style="text-align:center"><span class="eyebrow">根据你的记录生成</span><b id="summaryTitle">就医摘要</b></div><button class="icon-btn" data-toast="可以核对摘要字段"><i class="icon" data-lucide="pencil"></i></button></div>
+    <section class="card summary-banner"><span class="doc-icon"><i class="icon" data-lucide="file-heart"></i></span><span><b>就诊前请核对内容</b><small>医生会结合面诊和检查判断</small></span><em>待核对</em></section>
+    <div class="scroll" style="padding-top:0"><article class="card medical-sheet"><header class="sheet-head"><small>BODY PILOT · HEALTH SUMMARY</small><h2 id="sheetTitle">右侧腰部疼痛 · 12 天</h2></header><section class="sheet-section"><h3>主诉</h3><p id="sumComplaint">右侧下腰疼痛 12 天，起床和久坐后明显。</p></section><section class="sheet-section"><h3>现病史</h3><p id="sumHistory">搬箱后出现右侧下腰紧绷痛，初始 7/10，活动时加重；目前 3–4/10，未向臀部或腿部放射。</p></section><section class="sheet-section"><h3>危险信号筛查</h3><p id="sumDanger">8 月 13 日复核：会阴麻木、大小便障碍、双腿无力、发热与外伤均否认。</p></section><section class="sheet-section"><h3>治疗与功能变化</h3><p>已按康复师指导完成腰桥训练 9 次；目前可连续步行 25 分钟。</p></section><section class="sheet-section"><h3>当前状态</h3><p>最近疼痛 4/10。训练时右侧发力感更明显，未出现新的麻木或无力。</p></section></article><div class="attachment-row"><div class="card attachment"><span><i class="icon" data-lucide="chart-no-axes-column-increasing"></i></span><p><b>疼痛曲线</b><small>近 14 天</small></p></div><div class="card attachment"><span><i class="icon" data-lucide="notebook-tabs"></i></span><p><b>完整日记</b><small>共 12 篇</small></p></div></div></div>
+    <div class="sticky-actions"><button class="secondary" data-toast="PDF 已生成（Demo）">导出 PDF</button><button class="primary" data-open-share>分享给医生</button></div>
+  </section>
+
+  <section class="screen" data-screen="settings" data-screen-label="我的与设置">
+    <div class="topbar"><div><span class="eyebrow">资料与安全</span><h1>我的</h1></div><span style="width:44px"></span></div>
+    <section class="card profile-hero"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-labelledby%3D%22title%20desc%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3EBodyPilot%20%E6%A0%87%E5%BF%97%3C%2Ftitle%3E%0A%20%20%3Cdesc%20id%3D%22desc%22%3E%E4%B8%80%E4%B8%AA%E8%A2%AB%E5%8F%B6%E7%89%87%E9%99%AA%E4%BC%B4%E7%9A%84%E6%9F%94%E8%BD%AF%E8%BA%AB%E4%BD%93%E8%BD%AE%E5%BB%93%EF%BC%8C%E8%83%B8%E5%8F%A3%E6%9C%89%E7%8F%8A%E7%91%9A%E8%89%B2%E5%BF%83%E5%BD%A2%E8%AE%B0%E5%BD%95%E7%82%B9%E3%80%82%3C%2Fdesc%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M194%20377c-45-8-73-43-72-92%201-42%2024-70%2043-101%2025-40%2055-70%2095-82%2055-17%20111%202%20133%2050%2024%2053%2011%20127-22%20178-31%2048-83%2060-177%2047Z%22%20fill%3D%22%23f5e9d8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M177%20285c-28-29-54-70-48-118%205-33%2023-48%2047-36%2035%2018%2057%2059%2065%2099-22%203-44%2020-64%2055Z%22%20fill%3D%22%23a8c8a9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M151%20155c32%2027%2057%2061%2076%20102%22%20fill%3D%22none%22%20stroke%3D%22%235c846e%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22284%22%20cy%3D%22215%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20284%20215)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cellipse%20cx%3D%22349%22%20cy%3D%22229%22%20rx%3D%2212%22%20ry%3D%2217%22%20transform%3D%22rotate(10%20349%20229)%22%20fill%3D%22%23123f35%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M295%20253c14%2018%2034%2020%2051%204%22%20fill%3D%22none%22%20stroke%3D%22%23123f35%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M310%20298c17-21%2052-5%2045%2022-5%2020-27%2035-48%2048-16-21-32-43-28-62%205-23%2026-27%2031-8Z%22%20fill%3D%22%23ef6b5f%22%2F%3E%0A%3C%2Fsvg%3E%0A" alt=""><span><b>小林</b><small>已记录 12 天 · 恢复期</small></span></section>
+    <div class="scroll" style="padding-top:0"><div class="section-head"><h2>健康记录</h2></div><div class="settings-list"><button class="settings-row" data-go="summary"><span><i class="icon" data-lucide="file-heart"></i></span><p><b>就医摘要</b><small>整理症状、筛查和训练记录</small></p><i class="icon" data-lucide="chevron-right"></i></button><button class="settings-row" data-toast="数据导出设置（Demo）"><span><i class="icon" data-lucide="download"></i></span><p><b>数据导出</b><small>日记、疼痛曲线与训练记录</small></p><i class="icon" data-lucide="chevron-right"></i></button><button class="settings-row" data-toast="隐私设置（Demo）"><span><i class="icon" data-lucide="lock-keyhole"></i></span><p><b>隐私与删除</b><small>管理授权、设备与全部数据</small></p><i class="icon" data-lucide="chevron-right"></i></button></div><div class="section-head"><h2>记录设置</h2></div><div class="settings-list"><button class="settings-row" data-go="training"><span><i class="icon" data-lucide="dumbbell"></i></span><p><b>训练与提醒</b><small>设置训练时间和跳过规则</small></p><i class="icon" data-lucide="chevron-right"></i></button><button class="settings-row" data-toast="语音与称呼设置（Demo）"><span><i class="icon" data-lucide="mic"></i></span><p><b>语音与称呼</b><small>修改语音输入和昵称</small></p><i class="icon" data-lucide="chevron-right"></i></button></div></div>
+    <nav class="tabbar"><button data-go="home"><i class="icon" data-lucide="notebook-tabs"></i><span>日记</span></button><button data-go="conversation"><i class="icon" data-lucide="message-circle"></i><span>对话</span></button><button data-go="progress"><i class="icon" data-lucide="chart-no-axes-column-increasing"></i><span>进展</span></button><button class="active" data-go="settings"><i class="icon" data-lucide="user-round"></i><span>我的</span></button></nav>
+  </section>
+
+  <div class="modal" id="shareModal"><div class="modal-sheet"><h2>选择分享内容</h2><p>请先核对摘要。接收方可以保存你分享的文件。</p><div class="share-options"><button data-share="clinic">门诊版 · 摘要 + 疼痛曲线</button><button data-share="full">完整版 · 摘要 + 全部日记</button><button data-close-share>取消</button></div></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script>
+(() => {
+  const app = document.getElementById('app');
+  const screens = [...app.querySelectorAll('.screen')];
+  const toast = document.getElementById('toast');
+  const safetyItems = ['会阴区域新发麻木','新发大小便障碍','双腿无力或快速加重','剧痛伴发热或全身不适','近期明显外伤'];
+  const answers = Array(5).fill(null);
+  let toastTimer;
+  function showToast(message){ toast.textContent=message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>toast.classList.remove('show'),1800); }
+  function go(name){ screens.forEach(s=>s.classList.toggle('active',s.dataset.screen===name)); const active=screens.find(s=>s.dataset.screen===name); if(active){ const sc=active.querySelector('.scroll,.chat-body'); if(sc) sc.scrollTop=0; history.replaceState(null,'','#'+name); } }
+  function renderSafety(){
+    const list=document.getElementById('safetyList');
+    list.innerHTML=safetyItems.map((label,i)=>`<section class="card safety-item"><header><span>${i+1}</span><b>${label}</b></header><div class="tri-choice" data-index="${i}"><button class="no ${answers[i]==='no'?'selected':''}" data-value="no">没有</button><button class="yes ${answers[i]==='yes'?'selected':''}" data-value="yes">有</button><button class="unsure ${answers[i]==='unsure'?'selected':''}" data-value="unsure">不确定</button></div></section>`).join('');
+    const left=answers.filter(v=>v===null).length; const btn=document.getElementById('safetySubmit'); btn.textContent=left?`还需确认 ${left} 项`:'完成安全确认'; btn.dataset.ready=left?'0':'1';
+  }
+  renderSafety();
+  lucide.createIcons({attrs:{'aria-hidden':'true','stroke-width':'1.9'}});
+  app.addEventListener('click', e => {
+    const target=e.target.closest('button,[data-go],.diary'); if(!target) return;
+    if(target.dataset.go){ if(target.dataset.summaryMode==='danger') setDangerSummary(); go(target.dataset.go); if(target.dataset.toast) showToast(target.dataset.toast); return; }
+    if(target.dataset.toast){ showToast(target.dataset.toast); return; }
+    if(target.closest('.choice-grid') && target.classList.contains('choice')){ [...target.parentElement.children].forEach(x=>x.classList.remove('selected')); target.classList.add('selected'); return; }
+    if(target.closest('.quick-options')){ [...target.parentElement.children].forEach(x=>x.classList.remove('selected')); target.classList.add('selected'); setTimeout(()=>go('safety'),320); return; }
+    if(target.closest('.tri-choice')){ const group=target.closest('.tri-choice'); answers[+group.dataset.index]=target.dataset.value; renderSafety(); return; }
+    if(target.id==='safetySubmit'){
+      if(target.dataset.ready!=='1'){ showToast('请先确认全部 5 项'); return; }
+      const dangerIndex=answers.findIndex(v=>v==='yes'||v==='unsure');
+      if(dangerIndex>=0){ document.getElementById('dangerSignal').textContent=safetyItems[dangerIndex]; setDangerSummary(safetyItems[dangerIndex]); go('emergency'); } else go('result'); return;
+    }
+    if(target.hasAttribute('data-voice-start')){ app.querySelector('.voice-overlay').classList.add('show'); return; }
+    if(target.hasAttribute('data-voice-stop')){ app.querySelector('.voice-overlay').classList.remove('show'); setTimeout(()=>go('safety'),240); return; }
+    if(target.closest('.conversation-fold')){ target.closest('.conversation-fold').classList.toggle('open'); return; }
+    if(target.id==='newSignal'){ target.querySelector('.switch').classList.toggle('on'); return; }
+    if(target.id==='saveCheckin'){ if(document.querySelector('#newSignal .switch').classList.contains('on')){ setDangerSummary('随访中新出现麻木、无力或排便变化'); go('emergency'); } else { go('home'); showToast('随访已写入日记'); } return; }
+    if(target.hasAttribute('data-open-share')){ document.getElementById('shareModal').classList.add('show'); return; }
+    if(target.hasAttribute('data-close-share')){ document.getElementById('shareModal').classList.remove('show'); return; }
+    if(target.dataset.share){ document.getElementById('shareModal').classList.remove('show'); showToast(target.dataset.share==='clinic'?'门诊阅读版已准备分享':'完整记录版已准备分享'); }
+  });
+  const painScale=document.getElementById('painScale');
+  for(let i=0;i<=10;i++){ const b=document.createElement('button'); b.textContent=i; if(i===4)b.className='selected'; b.onclick=()=>{[...painScale.children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.getElementById('painValue').textContent=i;};painScale.appendChild(b); }
+  function setDangerSummary(signal='新发大小便障碍'){
+    document.getElementById('summaryTitle').textContent='紧急就医摘要'; document.getElementById('sheetTitle').textContent='右侧下腰剧痛 · 当前事件'; document.getElementById('sumComplaint').textContent='右侧下腰突发剧痛，伴危险信号，需要尽快评估。'; document.getElementById('sumHistory').textContent='约 40 分钟前出现右侧下腰疼痛，7/10，难以站立；随后确认新的异常症状。'; document.getElementById('sumDanger').textContent=signal;
+  }
+  document.querySelectorAll('[data-go="summary"]:not([data-summary-mode])').forEach(btn=>btn.addEventListener('click',()=>{ document.getElementById('summaryTitle').textContent='就医摘要'; document.getElementById('sheetTitle').textContent='右侧腰部疼痛 · 12 天'; document.getElementById('sumComplaint').textContent='右侧下腰疼痛 12 天，起床和久坐后明显。'; document.getElementById('sumHistory').textContent='搬箱后出现右侧下腰紧绷痛，初始 7/10，活动时加重；目前 3–4/10，未向臀部或腿部放射。'; document.getElementById('sumDanger').textContent='8 月 13 日复核：会阴麻木、大小便障碍、双腿无力、发热与外伤均否认。'; }));
+  document.getElementById('shareModal').addEventListener('click',e=>{if(e.target.id==='shareModal')e.currentTarget.classList.remove('show')});
+  globalThis.bodyPilot={go,showToast,reset(){answers.fill(null);renderSafety();go('welcome');},screens:screens.map(s=>s.dataset.screen)};
+  const requested=location.hash.slice(1); if(requested && screens.some(s=>s.dataset.screen===requested)) go(requested);
+  addEventListener('hashchange',()=>{const next=location.hash.slice(1);if(next&&screens.some(s=>s.dataset.screen===next))go(next);});
+})();
+</script>
+</body>
+</html>
